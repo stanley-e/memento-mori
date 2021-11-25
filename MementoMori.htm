@@ -2,10 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
   <title>Memento Mori</title>
   <meta name="description" content="">
   <meta name="author" content="Stanley Elliott">
+<style>
+.box {
+	width:7px;
+	height:7px;
+	margin:0px;
+	padding:0px;
+	box-sizing:border-box;
+	border:1px solid black;
+	display:inline-block;
+}
+.filled {
+	background-color:grey;
+}
+#app {
+	max-width:900px;
+	margin:auto;
+
+}
+</style>
 </head>
 <body>
+	<div id="app">
+		<div>
+			<div>
+				<label for="pj">Projected lifespan in weeks:</label>
+				<input id="pj" v-model.number="projectedLifespan" type="number">
+			</div>
+		</div>
+		<div>
+			<div>
+				<label for="ew">Elapsed weeks:</label>
+				<input id="ew" v-model.number="elapsedWeeks" type="number">
+			</div>
+		</div>
+				<div>
+			<template v-for="n in Math.max(elapsedWeeks,projectedLifespan)">
+				<div v-if="n < elapsedWeeks" class="box filled"></div>
+				<div v-else class="box"></div>
+			</template>
+		</div>
+	</div>
+	<script>
+	var vm = new Vue({
+		data: {elapsedWeeks:1239,projectedLifespan:4160},
+		el: "#app"
+	})
+	</script>
 </body>
 </html>
